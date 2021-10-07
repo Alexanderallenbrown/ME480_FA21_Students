@@ -7,6 +7,11 @@ import shutil
 import pwd
 import argparse
 import stat
+from datetime import datetime
+
+now = datetime.now()
+date_time = now.strftime("%m/%d/%y %H:%M:%S")
+
 
 import nbformat as nbf
 
@@ -16,7 +21,7 @@ opener = """
 <!DOCTYPE html>
 <html>
 <head></head>
-<body><p>ME480 Fall 2021 Released Materials</p>
+<body><p>ME480 Fall 2021 Released Materials: Last Updated:    """+str(date_time)+"""</p>
 
 """
 
