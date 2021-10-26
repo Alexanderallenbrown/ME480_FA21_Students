@@ -13,6 +13,9 @@
 <title>{{nb_title}}</title>
 
 {%- block html_head_js -%}
+{%- block html_head_js_jquery -%}
+<script src="{{ resources.jquery_url }}"></script>
+{%- endblock html_head_js_jquery -%}
 {%- block html_head_js_requirejs -%}
 <script src="{{ resources.require_js_url }}"></script>
 {%- endblock html_head_js_requirejs -%}
@@ -24,46 +27,50 @@
   {%- endif -%}
 {% endblock jupyter_widgets %}
 
-{% block extra_css %}
-{% endblock extra_css %}
-
 {% for css in resources.inlining.css -%}
   <style type="text/css">
-    {{ css }}
+  {{ css }}
   </style>
 {% endfor %}
 
 {% block notebook_css %}
-{{ resources.include_css("static/index.css") }}
-{% if resources.theme == 'dark' %}
-    {{ resources.include_css("static/theme-dark.css") }}
-{% else %}
-    {{ resources.include_css("static/theme-light.css") }}
-{% endif %}
+{{ resources.include_css("static/style.css") }}
 <style type="text/css">
-a.anchor-link {
-   display: none;
-}
-.highlight  {
-    margin: 0.4em;
-}
-
-/* Input area styling */
-.jp-InputArea {
-    overflow: hidden;
+/* Overrides of notebook CSS for static HTML export */
+body {
+  overflow: visible;
+  padding: 8px;
 }
 
-.jp-InputArea-editor {
-    overflow: hidden;
+div#notebook {
+  overflow: visible;
+  border-top: none;
 }
+
+{%- if resources.global_content_filter.no_prompt-%}
+div#notebook-container{
+  padding: 6ex 12ex 8ex 12ex;
+}
+{%- endif -%}
 
 @media print {
   body {
     margin: 0;
   }
+  div.cell {
+    display: block;
+    page-break-inside: avoid;
+  }
+  div.output_wrapper {
+    display: block;
+    page-break-inside: avoid;
+  }
+  div.output {
+    display: block;
+    page-break-inside: avoid;
+  }
 }
 </style>
-
 {% endblock notebook_css %}
 
 {{ mathjax() }}
@@ -75,15 +82,15 @@ a.anchor-link {
 </head>
 {%- endblock header -%}
 
-{%- block body_header -%}
-{% if resources.theme == 'dark' %}
-<body class="jp-Notebook" data-jp-theme-light="false" data-jp-theme-name="JupyterLab Dark">
-{% else %}
-<body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-{% endif %}
-{%- endblock body_header -%}
+{% block body_header %}
+<body>
+  <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+{% endblock body_header %}
 
 {% block body_footer %}
+    </div>
+  </div>
 </body>
 {% endblock body_footer %}
 
