@@ -21,11 +21,14 @@ opener = """
 <!DOCTYPE html>
 <html>
 <head></head>
-<body><p>ME480 Fall 2021 Released Materials: Last Updated:    """+str(date_time)+"""</p>
+<body><h1>ME480 Fall 2021 Released Materials</h1>
+<p style="text-align: center"> Last Updated:    """+str(date_time)+"""</p>
+<div style="text-align: center">
 
 """
 
 closer = """
+</div>
 </body>
 </html>
 """
@@ -53,7 +56,7 @@ def main():
             if file.endswith(".ipynb") and not "checkpoint" in file :
                 # print(rel_dir,file)
                 dst = os.path.join(docdir,rel_dir)
-                convertcmdpre = "jupyter nbconvert "+"--execute --to html --template templates/source_nb.tpl --output-dir "+dst+" "+os.path.join(rel_dir,file)
+                convertcmdpre = "jupyter nbconvert "+"--execute --to html --template templates/source_nb.tpl --output-dir "+dst+" "+os.path.join(rel_dir,file.replace(" ","\ "))
                 #convertcmdpre = "jupyter nbconvert  "+dst+"/*.ipynb"+" --to webpdf --output-dir "+dst
 
                 #print (convertcmdpre)
