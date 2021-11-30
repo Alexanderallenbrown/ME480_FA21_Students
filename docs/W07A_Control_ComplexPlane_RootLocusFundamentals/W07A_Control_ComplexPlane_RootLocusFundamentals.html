@@ -13191,6 +13191,29 @@ s = \sigma + j\omega
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">clear</span> <span class="nb">all</span>
+<span class="c">%define our complex numbers s1 and s2</span>
+<span class="n">s1</span> <span class="p">=</span> <span class="o">-</span><span class="mi">3</span><span class="o">+</span><span class="mi">2</span><span class="n">j</span>
+<span class="n">s2</span> <span class="p">=</span> <span class="mi">1</span><span class="o">+</span><span class="mi">3</span><span class="n">j</span>
+<span class="c">%addition and subtraction</span>
+<span class="n">s3</span> <span class="p">=</span> <span class="n">s1</span><span class="o">+</span><span class="n">s2</span>
+<span class="n">s4</span> <span class="p">=</span> <span class="n">s1</span><span class="o">-</span><span class="n">s2</span>
+<span class="c">%multiplication and division</span>
+<span class="n">s5</span> <span class="p">=</span> <span class="n">s1</span><span class="o">*</span><span class="n">s2</span>
+<span class="n">s6</span> <span class="p">=</span> <span class="n">s1</span><span class="o">/</span><span class="n">s2</span>
+<span class="c">%extract the real component from a complex number</span>
+<span class="n">s5_real</span> <span class="p">=</span> <span class="nb">real</span><span class="p">(</span><span class="n">s5</span><span class="p">)</span>
+<span class="c">%extract the imaginary component from a complex number</span>
+<span class="n">s5_imag</span> <span class="p">=</span> <span class="nb">imag</span><span class="p">(</span><span class="n">s5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13254,6 +13277,17 @@ $$s_5 = s_1s_2=(3.61)(3.16)e^{(2.55+1.24)j}$$<p>We can use MATLAB/Octave to asse
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">s5</span>
+<span class="n">s5_exponentialform</span> <span class="p">=</span> <span class="mf">3.60555</span><span class="o">*</span><span class="mf">3.16228</span><span class="o">*</span><span class="nb">exp</span><span class="p">((</span><span class="mf">2.55359</span><span class="o">+</span><span class="mf">1.24905</span><span class="p">)</span><span class="o">*</span><span class="n">j</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13331,6 +13365,21 @@ $$\frac{y(s)}{r(s)} = G_{cl}(s)=\frac{CP}{1+CPH}$$<p>Again, when we haved design
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">clear</span> <span class="nb">all</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+
+<span class="n">P</span> <span class="p">=</span> <span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">15</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="n">s</span><span class="o">+</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="mi">10</span><span class="o">*</span><span class="n">s</span><span class="o">+</span><span class="mi">30</span><span class="p">));</span>
+
+<span class="n">rlocus</span><span class="p">(</span><span class="n">P</span><span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13342,69 +13391,38 @@ $$\frac{y(s)}{r(s)} = G_{cl}(s)=\frac{CP}{1+CPH}$$<p>Again, when we haved design
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>                                                                                                                                 
-                                                                 Root Locus of P                                                 
-                                                                                                                                 
-                   |---------------------------------------------------------------------------------------------------------|   
-                   |  ##+            +            +            +            +           +            +-------------------**-+|   
-                   |    ##           &amp;            &amp;            &amp;            &amp;           &amp;            |###?###asymptotes**   ||   
-                   |    &amp;&amp;##         &amp;            &amp;            &amp;            &amp;           &amp;            |@@@?@@@locus   ****   ||   
-                   |    &amp; &amp;&amp;##       &amp;            &amp;            &amp;            &amp;           &amp;            |   B   open loop poles||   
-                   |    &amp;  &amp;&amp; ##     &amp;            &amp;            &amp;            &amp;           &amp;            +---F---zeros*-**------+|   
-                   |    &amp;    &amp;&amp; #    &amp;            &amp;            &amp;            &amp;           &amp;            &amp;          * **         |   
-                15 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;****&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |    &amp;       &amp;&amp;&amp;##&amp;            &amp;            &amp;            &amp;           &amp;            &amp;      ****  &amp;          |   
-                   |    &amp;         &amp;&amp; ##           &amp;            &amp;            &amp;           &amp;            &amp;    *****   &amp;          |   
-                   |    &amp;           &amp;&amp; ##         &amp;            &amp;            &amp;           &amp;            &amp;  ** **     &amp;          |   
-                   |    &amp;            &amp;&amp;&amp; #        &amp;            &amp;            &amp;           &amp;            &amp; * **       &amp;          |   
-                   |    &amp;            &amp; &amp;&amp; ##      &amp;            &amp;            &amp;           &amp;            ** **        &amp;          |   
-                   |    &amp;            &amp;  &amp;&amp;&amp; ##    &amp;            &amp;            &amp;           &amp;          **&amp;**          &amp;          |   
-                10 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;**&amp;**&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |    &amp;            &amp;      &amp;&amp;  ##&amp;            &amp;            &amp;           &amp;      ** ***&amp;            &amp;          |   
-                   |    &amp;            &amp;       &amp;&amp;&amp;  ##           &amp;            &amp;           &amp;    **  **  &amp;            &amp;          |   
-                   |    &amp;            &amp;         &amp;&amp; &amp; #          &amp;            &amp;           &amp;   *  ***   &amp;            &amp;          |   
-                   |    &amp;            &amp;          &amp;&amp;&amp;  ##        &amp;            &amp;           &amp; **  **     &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;&amp;   ##      &amp;            &amp;           **   **      &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;&amp;&amp;    ##    &amp;            &amp;         **&amp;  **        &amp;            &amp;          |   
-                 5 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;**&amp;&amp;&amp;&amp;**&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |    &amp;            &amp;            &amp;  &amp;&amp;      # &amp;            &amp;      * $$$&amp; *          &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;   &amp;&amp;      ##            &amp;    **$$$ $&amp; *          &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;    &amp;&amp;      &amp;##          &amp;  ** $$   F&amp; *          &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;     &amp;      &amp;  ##        B**  $$     B**          &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;      &amp;     &amp;    ##     *$$  $$      &amp;            &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;      &amp;     &amp;      ## ** &amp;$$$$       &amp;            &amp;            &amp;          |   
-                 0 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;B@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$&amp;&amp;&amp;&amp;&amp;&amp;B&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |    &amp;            &amp;            &amp;      @     &amp;    $$     %%####       &amp;            &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;      @     &amp;  $$        ##% ##      &amp;            &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;     @      &amp;$$          B  %%##     B==          &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;    @@     $$            &amp;    %##   F&amp; =          &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;   @@     $ &amp;            &amp;      ### #&amp; =          &amp;            &amp;          |   
-                   |    &amp;            &amp;            &amp;  @@    $$  &amp;            &amp;       %###&amp; =          &amp;            &amp;          |   
-                -5 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;@@&amp;&amp;&amp;$$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;%%&amp;&amp;==&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |    &amp;            &amp;            &amp;@@  $$      &amp;            &amp;           %% ==        &amp;            &amp;          |   
-                   |    &amp;            &amp;            @@ $$        &amp;            &amp;           &amp; %% ==      &amp;            &amp;          |   
-                   |    &amp;            &amp;          @@&amp; $          &amp;            &amp;           &amp;   % ==     &amp;            &amp;          |   
-                   |    &amp;            &amp;         @@ $$           &amp;            &amp;           &amp;    %%===   &amp;            &amp;          |   
-                   |    &amp;            &amp;       @@@$$&amp;            &amp;            &amp;           &amp;      %%==  &amp;            &amp;          |   
-                   |    &amp;            &amp;      @@$$  &amp;            &amp;            &amp;           &amp;        %===&amp;            &amp;          |   
-               -10 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;@@@$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;%==&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |    &amp;            &amp;  @@@$      &amp;            &amp;            &amp;           &amp;            %==          &amp;          |   
-                   |    &amp;            &amp; @@$        &amp;            &amp;            &amp;           &amp;            &amp; %==        &amp;          |   
-                   |    &amp;            @@@$         &amp;            &amp;            &amp;           &amp;            &amp;  %==       &amp;          |   
-                   |    &amp;           @@$           &amp;            &amp;            &amp;           &amp;            &amp;    %==     &amp;          |   
-                   |    &amp;         @@$&amp;            &amp;            &amp;            &amp;           &amp;            &amp;      ===   &amp;          |   
-                   |    &amp;       @@@  &amp;            &amp;            &amp;            &amp;           &amp;            &amp;        ==  &amp;          |   
-               -15 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;==&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |    &amp;    @@$     &amp;            &amp;            &amp;            &amp;           &amp;            &amp;           %==         |   
-                   |    &amp;  @@$       &amp;            &amp;            &amp;            &amp;           &amp;            &amp;            &amp;%==       |   
-                   |    &amp; @@         &amp;            &amp;            &amp;            &amp;           &amp;            &amp;            &amp;  ==      |   
-                   |    @@           &amp;            &amp;            &amp;            &amp;           &amp;            &amp;            &amp;    ==    |   
-                   |  $$&amp;            &amp;            &amp;            &amp;            &amp;           &amp;            &amp;            &amp;      %%  |   
-                   |    +            +            +            +            +           +            +            +          |   
-                   |---------------------------------------------------------------------------------------------------------|   
-                       -25          -20          -15          -10          -5           0            5           10              
-                                                        Real Axis     gain = [0, 450446]                                         
-                                                                                                                                 
+<pre>                                                                                                                           
+                                                              Root Locus of P                                              
+                                                                                                                           
+                   |---------------------------------------------------------------------------------------------------|   
+                   |    &amp;&amp;##        +           +           +           +           +          +---------------****---+|   
+                   |    &amp;&amp;&amp;&amp;&amp;###    &amp;           &amp;           &amp;           &amp;           &amp;          |###?###asympto****    ||   
+                15 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;###&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;|@@@?@@@loc****       +||   
+                   |    &amp;       &amp;&amp;&amp;&amp;####        &amp;           &amp;           &amp;           &amp;          |   B***open loop poles||   
+                   |    &amp;           &amp;&amp;&amp;&amp;####    &amp;           &amp;           &amp;           &amp;          ****F***zeros----------+|   
+                10 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;####&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;********&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |    &amp;           &amp;      &amp;&amp;&amp;  ####        &amp;           &amp;           &amp;  **** **** &amp;           &amp;         |   
+                   |    &amp;           &amp;         &amp;&amp;&amp;   ####    &amp;           &amp;          ****  ****    &amp;           &amp;         |   
+                 5 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;####&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;****&amp;&amp;&amp;****&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |    &amp;           &amp;           &amp;  &amp;&amp;&amp;      ####        &amp;  ****$$$$$&amp; *          &amp;           &amp;         |   
+                   |    &amp;           &amp;           &amp;    &amp;&amp;     &amp;   ####   *B$*  $$$   FB**          &amp;           &amp;         |   
+                 0 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;B@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$$$$&amp;&amp;&amp;&amp;B&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |    &amp;           &amp;           &amp;      @    $$$$        &amp;#####%     &amp;            &amp;           &amp;         |   
+                   |    &amp;           &amp;           &amp;    @@  $$$&amp;           B#   ###%% FB==          &amp;           &amp;         |   
+                   |    &amp;           &amp;           &amp;  @@@$$$   &amp;           &amp;      #####%%=          &amp;           &amp;         |   
+                -5 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;@@@$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;====&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |    &amp;           &amp;         @@@           &amp;           &amp;           &amp;    ====    &amp;           &amp;         |   
+                   |    &amp;           &amp;     $@@@  &amp;           &amp;           &amp;           &amp;       ====%&amp;           &amp;         |   
+               -10 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;====%%&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |    &amp;         $$@@@@        &amp;           &amp;           &amp;           &amp;            &amp; ====%%    &amp;         |   
+                   |    &amp;      $@@@@&amp;           &amp;           &amp;           &amp;           &amp;            &amp;    =====% &amp;         |   
+               -15 |-+&amp;&amp;&amp;&amp;&amp;$@@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;====%%&amp;&amp;&amp;&amp;&amp;+-|   
+                   |   $$@@@@       &amp;           &amp;           &amp;           &amp;           &amp;            &amp;           &amp;====%%   |   
+                   |  $ @@          +           +           +           +           +            +           +   == %  |   
+                   |---------------------------------------------------------------------------------------------------|   
+                       -25         -20         -15         -10         -5           0            5          10             
+                                                     Real Axis     gain = [0, 450446]                                      
+                                                                                                                           
 </pre>
 </div>
 </div>
@@ -13438,6 +13456,16 @@ $$\frac{y(s)}{r(s)} = G_{cl}(s)=\frac{CP}{1+CPH}$$<p>Again, when we haved design
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">help</span> <span class="n">rlocus</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13616,6 +13644,47 @@ $$K = \frac{1}{\frac{99.5}{.25}} = 0.0025$$<p>So we've determined what gain fact
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">clear</span> <span class="nb">all</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+
+<span class="n">z</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span><span class="c">%this is our choice of zero location for the PI controller (we don&#39;t know HOW to choose this yet... we just picked it)</span>
+
+<span class="n">P</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">H</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">Cstar</span> <span class="p">=</span> <span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="n">G</span> <span class="p">=</span> <span class="n">Cstar</span><span class="o">*</span><span class="n">P</span><span class="p">;</span>
+
+<span class="c">%plot the root locus</span>
+<span class="n">rlocus</span><span class="p">(</span><span class="n">G</span><span class="o">*</span><span class="n">H</span><span class="p">)</span>
+
+<span class="nb">figure</span>
+<span class="n">rlocus</span><span class="p">(</span><span class="n">G</span><span class="o">*</span><span class="n">H</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="nb">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">20</span> <span class="mi">20</span><span class="p">])</span>
+
+<span class="c">%we used the magnitude criteria to find that, for our desired pole:</span>
+<span class="n">K</span> <span class="p">=</span> <span class="mf">0.0025</span><span class="p">;</span>
+<span class="c">%we decided that in our controller, C(s) = ksum*(kp + ki/s), we would keep ksum=1, so</span>
+<span class="n">Ksum</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span><span class="c">%our choice (either kp or ksum is our choice)</span>
+<span class="n">Kp</span> <span class="p">=</span> <span class="n">K</span><span class="o">/</span><span class="n">Ksum</span><span class="p">;</span><span class="c">%just algebra here</span>
+<span class="c">%now we find Ki based on our chosen zero location z=100</span>
+<span class="c">%z = Ki/Kp so</span>
+<span class="n">Ki</span> <span class="p">=</span> <span class="n">z</span><span class="o">*</span><span class="n">Kp</span><span class="p">;</span>
+
+<span class="c">%now we can implement our controller, and check out the step response to make sure it makes sense for having an eigenvalue at s=-0.5</span>
+<span class="n">C</span> <span class="p">=</span> <span class="n">Ksum</span><span class="o">*</span><span class="p">(</span><span class="n">Kp</span><span class="o">+</span><span class="n">Ki</span><span class="o">/</span><span class="n">s</span><span class="p">);</span>
+<span class="n">Gcl</span> <span class="p">=</span> <span class="n">minreal</span><span class="p">(</span><span class="n">C</span><span class="o">*</span><span class="n">P</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">C</span><span class="o">*</span><span class="n">P</span><span class="o">*</span><span class="n">H</span><span class="p">))</span>
+<span class="nb">figure</span>
+<span class="n">step</span><span class="p">(</span><span class="n">Gcl</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13627,258 +13696,134 @@ $$K = \frac{1}{\frac{99.5}{.25}} = 0.0025$$<p>So we've determined what gain fact
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>                                                                                                                                 
-                                                                 Root Locus of                                                   
-                                                                                                                                 
-                    |--------------------------------------------------------------------------------------------------------|   
-                    |   +           +           +           +           +           +           +    +----------------------+|   
-                100 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;|###?###locus         +||   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    |   B$$$open loop poles||   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    +--$F---zeros----------+|   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;      $    &amp;    $$     &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;     $     &amp;     $$    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    $$     &amp;      $    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    $      &amp;      $    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;   $       &amp;       $   &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;   $       &amp;        $  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  $        &amp;        $  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  $        &amp;        $  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  $        &amp;         $ &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  $        &amp;         $ &amp;    |   
-                 50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$&amp;&amp;&amp;+-|   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; $         &amp;          $&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; $         &amp;          $&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;          $&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;          $&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           $           &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           $           &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           $           &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           $           &amp;           $    |   
-                  0 |****#######################################################################$$$$$$$$$$$$F***********B****|   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           #           &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           #           &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           #           &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           #           &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;          #&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;          #&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; #         &amp;          #&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; #         &amp;          #&amp;    |   
-                -50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;#&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;+-|   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  #        &amp;         # &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  #        &amp;         # &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  #        &amp;        #  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  #        &amp;        #  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;   #       &amp;        #  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;   #       &amp;       #   &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    #      &amp;      #    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    ##     &amp;      #    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;     #     &amp;     ##    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;      #    &amp;    ##     &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;       ##  &amp;   ##      &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;        #######        &amp;    |   
-               -100 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                    |   +           +           +           +           +           +           +           +           +    |   
-                    |--------------------------------------------------------------------------------------------------------|   
-                      -800        -700        -600        -500        -400        -300        -200        -100          0        
-                                                        Real Axis     gain = [0, 909.71]                                         
-                                                                                                                                 
-                                                                                                                                 
-                                                                 Root Locus of                                                   
-                                                                                                                                 
-                    |--------------------------------------------------------------------------------------------------------|   
-                    |   +           +           +           +           +           +           +    +----------------------+|   
-                100 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;|###?###locus         +||   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    |   B$$$open loop poles||   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    +--$F---zeros----------+|   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;      $$   &amp;    $$     &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;     $$    &amp;     $$    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    $$     &amp;      $    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    $      &amp;      $$   &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;   $$      &amp;       $   &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;   $       &amp;       $$  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  $$       &amp;        $  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  $        &amp;        $$ &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; $$        &amp;         $ &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; $         &amp;         $ &amp;    |   
-                 50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$&amp;&amp;&amp;+-|   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; $         &amp;          $&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$$         &amp;          $&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;          $&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;          $&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;          $$    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;$          &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           $           &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           $           &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           $           &amp;           $    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           $           &amp;           $    |   
-                  0 |****#######################################################################$$$$$$$$$$$$F***********B****|   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           #           &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           #           &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           #           &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           #           &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;           #    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;          ##    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;          #&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;#          &amp;          #&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;##         &amp;          #&amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; #         &amp;          #&amp;    |   
-                -50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;#&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;+-|   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; #         &amp;         # &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp; ##        &amp;         # &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  #        &amp;        ## &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;  ##       &amp;        #  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;   #       &amp;       ##  &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;   ##      &amp;       #   &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    #      &amp;      ##   &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;    ##     &amp;      #    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;     ##    &amp;     ##    &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;      ##   &amp;    ##     &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;       ##  &amp;  ###      &amp;    |   
-                    |   &amp;           &amp;           &amp;           &amp;           &amp;           &amp;           &amp;        #######        &amp;    |   
-               -100 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                    |   +           +           +           +           +           +           +           +           +    |   
-                    |--------------------------------------------------------------------------------------------------------|   
-                      -800        -700        -600        -500        -400        -300        -200        -100          0        
-                                                        Real Axis     gain = [0, 909.51]                                         
-                                                                                                                                 
-                                                                                                                                 
-                                                                 Root Locus of                                                   
-                                                                                                                                 
-                    |--------------------------------------------------------------------------------------------------------|   
-                    |                    +                    +                    +                 +----------------------+|   
-                100 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;|###?###locus         +||   
-                    |                    &amp;                    &amp;                    &amp;                 |   B   open loop poles||   
-                    |                    &amp;                    &amp;                    &amp;                 +---F---zeros----------+|   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                 50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |$                   &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    | $$$$$$$$$$$$$$$$$$$$$$$$                &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;    $$$$$$$$$$$$$$$$$$$                  &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;  $$$$$$$$$$$$$$$$$ &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                   $$$$$$$$$$$$$$        &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;            $$$$$$$$$                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;$$$$$$              |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;      $$$           |   
-                  0 |***********************************************************************************B#########$$$$$$$$$$$|   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;      ###           |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;######              |   
-                    |                    &amp;                    &amp;                    &amp;            #########                    |   
-                    |                    &amp;                    &amp;                   ##############        &amp;                    |   
-                    |                    &amp;                    &amp;  ################# &amp;                    &amp;                    |   
-                    |                    &amp;    ###################                  &amp;                    &amp;                    |   
-                    | ########################                &amp;                    &amp;                    &amp;                    |   
-                    |#                   &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                -50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-                    |                    &amp;                    &amp;                    &amp;                    &amp;                    |   
-               -100 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                    |                    +                    +                    +                    +                    |   
-                    |--------------------------------------------------------------------------------------------------------|   
-                   -5                   -4                   -3                   -2                   -1                    0   
-                                                        Real Axis     gain = [0, 909.51]                                         
-                                                                                                                                 
-                                                                                                                                 
-                                                                 Root Locus of                                                   
-                                                                                                                                 
-                20 |---------------------------------------------------------------------------------------------------------|   
-                   |                    +                    +           $$$       +                 +----------------------+|   
-                   |                    &amp;                    &amp;              $$$    &amp;                 |###?###locus          ||   
-                   |                    &amp;                    &amp;                 $$$ &amp;                 |   B   open loop poles||   
-                   |                    &amp;                    &amp;                    $$$                +---F---zeros----------+|   
-                   |                    &amp;                    &amp;                     &amp; $$                 &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;   $$$              &amp;                    |   
-                15 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |                    &amp;                    &amp;                     &amp;        $$          &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;          $$        &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;            $$      &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;              $$    &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;                $$  &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;                  $$&amp;                    |   
-                10 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;$                   |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp; $$                 |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;   $                |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;    $               |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;     $              |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;      $             |   
-                 5 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;       $            |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;        $           |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;        $           |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;         $          |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;         $          |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;         $          |   
-                 0 |************************************************************************************B#########$$$$$$$$$$$|   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;         #          |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;         #          |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;         #          |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;        #           |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;        #           |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;       #            |   
-                -5 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;#&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;      #             |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;     #              |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;    #               |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;   #                |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp; ##                 |   
-                   |                    &amp;                    &amp;                     &amp;                    &amp;#                   |   
-               -10 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;#&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |                    &amp;                    &amp;                     &amp;                  ##&amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;               ###  &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;              #     &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;            ##      &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;          ##        &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp;        ##          &amp;                    |   
-               -15 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
-                   |                    &amp;                    &amp;                     &amp;   ###              &amp;                    |   
-                   |                    &amp;                    &amp;                     &amp; ##                 &amp;                    |   
-                   |                    &amp;                    &amp;                   ####                   &amp;                    |   
-                   |                    &amp;                    &amp;                 ##  &amp;                    &amp;                    |   
-                   |                    &amp;                    &amp;              ###    &amp;                    &amp;                    |   
-                   |                    +                    +           ###       +                    +                    |   
-               -20 |---------------------------------------------------------------------------------------------------------|   
-                  -5                   -4                   -3                    -2                   -1                    0   
-                                                        Real Axis     gain = [0, 909.51]                                         
-                                                                                                                                 
+<pre>                                                                                                                           
+                                                              Root Locus of                                                
+                                                                                                                           
+                    |--------------------------------------------------------------------------------------------------|   
+                100 |-+&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;+-----$$$$$$-----------+|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  |##$$$##loc$$$         ||   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  | $$B   open loop poles||   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  $$--F---zeros--$$------+|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  $       &amp;       $$  &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp; $        &amp;        $$ &amp;   |   
+                 50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$&amp;&amp;&amp;+-|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;$         &amp;         $$&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          $$         &amp;          $&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          $          &amp;          $&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          $          &amp;          $&amp;   |   
+                  0 |****###################################################################$$$$$$$$$$$F**********BB***|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          #          &amp;          #&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          #          &amp;          #&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          #          &amp;          #&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          ##         &amp;          #&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;#         &amp;         ##&amp;   |   
+                -50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;#&amp;&amp;&amp;+-|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp; #        &amp;        ## &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  #       &amp;       ##  &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  ##      &amp;      ##   &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;    ##    &amp;     ##    &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;     ###  &amp;  ###      &amp;   |   
+               -100 |-+&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;######&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;+-|   
+                    |--------------------------------------------------------------------------------------------------|   
+                      -800       -700        -600       -500       -400        -300       -200       -100          0       
+                                                     Real Axis     gain = [0, 909.71]                                      
+                                                                                                                           
+                                                                                                                           
+                                                              Root Locus of                                                
+                                                                                                                           
+                    |--------------------------------------------------------------------------------------------------|   
+                100 |-+&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;+----$$$$$$$-----------+|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  |##$$$##loc$$$$        ||   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  |$$$B   open loop poles||   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  $$--F---zeros--$$------+|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp; $$       &amp;       $$  &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp; $        &amp;        $$ &amp;   |   
+                 50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$&amp;&amp;&amp;+-|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;$         &amp;         $$&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          $$         &amp;          $&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          $          &amp;          $&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          $          &amp;          $&amp;   |   
+                  0 |****###################################################################$$$$$$$$$$$F**********BB***|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          #          &amp;          #&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          #          &amp;          #&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          #          &amp;          #&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          ##         &amp;          #&amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;#         &amp;         ##&amp;   |   
+                -50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;#&amp;&amp;&amp;+-|   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp; #        &amp;        ## &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp; ##       &amp;       ##  &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;  ##      &amp;      ##   &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;   ###    &amp;     ##    &amp;   |   
+                    |   &amp;          &amp;           &amp;          &amp;          &amp;           &amp;          &amp;     ###  &amp;  ####     &amp;   |   
+               -100 |-+&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;#######&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;+-|   
+                    |--------------------------------------------------------------------------------------------------|   
+                      -800       -700        -600       -500       -400        -300       -200       -100          0       
+                                                     Real Axis     gain = [0, 909.51]                                      
+                                                                                                                           
+                                                                                                                           
+                                                              Root Locus of                                                
+                                                                                                                           
+                    |--------------------------------------------------------------------------------------------------|   
+                100 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+----------------------+|   
+                    |                   &amp;                   &amp;                  &amp;               |###?###locus          ||   
+                    |                   &amp;                   &amp;                  &amp;               |   B   open loop poles||   
+                    |                   &amp;                   &amp;                  &amp;               +---F---zeros----------+|   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+                 50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+                    |$$$$$$$$$$$$$$$$$$$&amp;                   &amp;                  &amp;                   &amp;                   |   
+                    |                   $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ &amp;                   &amp;                   |   
+                    |                   &amp;                   &amp;                 $$$$$$$$$$$$$$$$$$$$$$$$                 |   
+                  0 |******************************************************************************B##$$$$$$$$$$$$$$$$$|   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;  ########         |   
+                    |                   &amp;                   &amp;                 ########################                 |   
+                    |                   ###################################### &amp;                   &amp;                   |   
+                    |###################&amp;                   &amp;                  &amp;                   &amp;                   |   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+                -50 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+                    |                   &amp;                   &amp;                  &amp;                   &amp;                   |   
+               -100 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                    |--------------------------------------------------------------------------------------------------|   
+                   -5                  -4                  -3                 -2                  -1                   0   
+                                                     Real Axis     gain = [0, 909.51]                                      
+                                                                                                                           
+                                                                                                                           
+                                                              Root Locus of                                                
+                                                                                                                           
+                20 |---------------------------------------------------------------------------------------------------|   
+                   |                   +                   +            $$$$$$ +               +----------------------+|   
+                   |                   &amp;                   &amp;                  $$$$$$           |###?###locus          ||   
+                15 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$$$$&amp;&amp;&amp;&amp;&amp;&amp;|   B   open loop poles||   
+                   |                   &amp;                   &amp;                   &amp;         $$$$  +---F---zeros----------+|   
+                   |                   &amp;                   &amp;                   &amp;             $$$$  &amp;                   |   
+                10 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;$$$                |   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;   $$              |   
+                 5 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;$$&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;       $           |   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;        $          |   
+                 0 |*******************************************************************************B#########$$$$$$$$$$|   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;         #         |   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;        #          |   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;       #           |   
+                -5 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;##&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;   ##              |   
+                   |                   &amp;                   &amp;                   &amp;                   &amp;###                |   
+               -10 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;###&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |                   &amp;                   &amp;                   &amp;             ####  &amp;                   |   
+                   |                   &amp;                   &amp;                   &amp;         ####      &amp;                   |   
+               -15 |-+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;#####&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;+-|   
+                   |                   &amp;                   &amp;                  ######               &amp;                   |   
+                   |                   +                   +            ###### +                   +                   |   
+               -20 |---------------------------------------------------------------------------------------------------|   
+                  -5                  -4                  -3                  -2                  -1                   0   
+                                                     Real Axis     gain = [0, 909.51]                                      
+                                                                                                                           
 
 Transfer function &#39;Gcl&#39; from input &#39;u1&#39; to output ...
 
@@ -14007,6 +13952,17 @@ Continuous-time model.
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14049,6 +14005,17 @@ Continuous-time model.
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -14100,6 +14067,38 @@ Continuous-time model.
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="nb">close</span> <span class="nb">all</span>
+<span class="n">clear</span> <span class="nb">all</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+
+<span class="c">%let&#39;s say your closed loop transfer function was the following for a particular gain Kp</span>
+<span class="n">Gcl</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c">%to extract the denominator coefficients as vectors of decreasing power of s, we can do this:</span>
+<span class="p">[</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">]</span> <span class="p">=</span> <span class="n">tfdata</span><span class="p">(</span><span class="n">Gcl</span><span class="p">,</span><span class="s">&#39;v&#39;</span><span class="p">)</span><span class="c">% the &#39;v&#39; argument tells it to return these as a vector rather than cell array.</span>
+
+<span class="c">%now, we can use the &#39;roots&#39; function to find the roots of the characteristic equation</span>
+<span class="n">myroots</span> <span class="p">=</span> <span class="nb">roots</span><span class="p">(</span><span class="n">den</span><span class="p">)</span>
+
+<span class="c">%to plot the real vs. imaginary components on a graph, we can do the following thing:</span>
+<span class="nb">figure</span><span class="p">()</span>
+<span class="nb">plot</span><span class="p">(</span><span class="nb">real</span><span class="p">(</span><span class="n">myroots</span><span class="p">),</span><span class="nb">imag</span><span class="p">(</span><span class="n">myroots</span><span class="p">),</span><span class="s">&#39;kx&#39;</span><span class="p">,</span><span class="s">&#39;MarkerSize&#39;</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="nb">grid</span> <span class="n">on</span>
+<span class="nb">title</span><span class="p">(</span><span class="s">&#39;test plot to show how you can make plot eigenvalues on the s plane&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;real component &#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;imaginary component&#39;</span><span class="p">)</span>
+
+<span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">

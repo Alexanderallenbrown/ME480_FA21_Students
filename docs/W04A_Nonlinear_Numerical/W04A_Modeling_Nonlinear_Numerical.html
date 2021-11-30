@@ -13465,6 +13465,77 @@ $$y(k) = y(k-1) + \dot{y}(k-1)T$$
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">%Set up parameters of the models</span>
+<span class="n">K</span> <span class="p">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="n">a</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="c">%simulation parameters</span>
+<span class="n">simtime</span> <span class="p">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="n">dt</span> <span class="p">=</span> <span class="p">.</span><span class="mi">001</span><span class="p">;</span>
+<span class="c">%simulation time vector-- we can make it common between both nonlinear and linear models</span>
+<span class="n">t</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:</span><span class="n">dt</span><span class="p">:</span><span class="n">simtime</span><span class="p">;</span>
+
+<span class="c">%set up input situation</span>
+<span class="n">ubar</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">du</span> <span class="p">=</span> <span class="mf">0.5</span><span class="p">;</span>
+<span class="c">%set up the input vector for TOTAL input u = ubar + du</span>
+<span class="n">ubarvec</span> <span class="p">=</span> <span class="n">ubar</span><span class="o">*</span><span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+<span class="n">duvec</span> <span class="p">=</span> <span class="n">du</span><span class="o">*</span><span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+<span class="n">u</span> <span class="p">=</span> <span class="p">(</span><span class="n">ubar</span><span class="o">+</span><span class="n">du</span><span class="p">)</span><span class="o">*</span><span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+
+<span class="c">%set up variables for the nonlinear simulation</span>
+<span class="n">ynl</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span> <span class="c">%y for nonlinear</span>
+<span class="n">ydnl</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span> <span class="c">%ydot for nonlinear</span>
+<span class="c">%set up the initial conditions. Use the NOP equations to set them!</span>
+<span class="n">ybar</span> <span class="p">=</span> <span class="p">(</span><span class="n">K</span><span class="p">)</span><span class="o">/</span><span class="n">ubar</span><span class="p">;</span>
+<span class="n">ynl</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="n">ybar</span><span class="p">;</span>
+<span class="n">ydnl</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c">%set up variables for the linear simulation. INCREMENTAL variables!!</span>
+<span class="n">Dyl</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span> <span class="c">% y for linear</span>
+<span class="n">Dydl</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">t</span><span class="p">));</span> <span class="c">%ydot for linear</span>
+<span class="c">%set up the initial conditions. Use the NOP equations to set them!</span>
+<span class="c">% For linearized, we are using Delta y, so the IC is 0!!</span>
+<span class="n">Dyl</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">Dydl</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">=</span> <span class="mi">0</span><span class="p">;</span>
+
+
+<span class="c">%perform Euler Integration for the NONLINEAR model</span>
+<span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="mi">2</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="c">%highest derivative is a function of the others</span>
+    <span class="n">yddnl</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">a</span>^<span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="n">K</span> <span class="o">-</span> <span class="n">u</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">ynl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">ydnl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span> <span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">ydnl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="p">);</span>
+    <span class="c">%ydot can be integrated using ydd we just calculated</span>
+    <span class="n">ydnl</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">ydnl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">yddnl</span><span class="p">;</span>
+    <span class="c">%y can be integrated using the previous value of ydot.</span>
+    <span class="n">ynl</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">ynl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">ydnl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">%perform Euler Integration for the LINEARIZED model</span>
+<span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="mi">2</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="c">%highest derivative is a function of the others</span>
+    <span class="n">Dyddl</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">a</span>^<span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span> <span class="n">K</span> <span class="o">-</span> <span class="n">ubar</span><span class="o">*</span><span class="n">ybar</span> <span class="o">-</span> <span class="n">ubar</span><span class="o">*</span><span class="n">Dyl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">ybar</span><span class="o">*</span><span class="n">duvec</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span><span class="n">Dydl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">);</span><span class="c">%note Delta u (duvec) used here, not total u!</span>
+    <span class="c">%ydot can be integrated using ydd we just calculated</span>
+    <span class="n">Dydl</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">Dydl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">Dyddl</span><span class="p">;</span>
+    <span class="c">%y can be integrated using the previous value of ydot.</span>
+    <span class="n">Dyl</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">Dyl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">dt</span><span class="o">*</span><span class="n">Dydl</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">%shift linearized model up to start at NOP!</span>
+<span class="n">yl</span> <span class="p">=</span> <span class="n">Dyl</span> <span class="o">+</span> <span class="n">ybar</span><span class="p">;</span>
+
+<span class="c">% plot the results to see agreement!!</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">ynl</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">yl</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;System Output (quarks)&#39;</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&#39;Nonlinear Model&#39;</span><span class="p">,</span><span class="s">&#39;Linearized Model&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13547,6 +13618,17 @@ $$y(k) = y(k-1) + \dot{y}(k-1)T$$
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">

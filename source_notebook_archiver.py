@@ -57,7 +57,7 @@ def main():
             if file.endswith(".ipynb") and not "checkpoint" in file :
                 # print(rel_dir,file)
                 dst = os.path.join(docdir,rel_dir)
-                convertcmdpre = "jupyter nbconvert "+"--execute --to html --template templates/source_nb.tpl --output-dir "+dst+" "+os.path.join(rel_dir,file.replace(" ","\ "))
+                convertcmdpre = "jupyter nbconvert "+"--execute --to html --template templates/source_nb.tpl --output-dir "+dst+" "+os.path.join(rel_dir.replace(" ","\ "),file.replace(" ","\ "))
                 #convertcmdpre = "jupyter nbconvert  "+dst+"/*.ipynb"+" --to webpdf --output-dir "+dst
 
                 #print (convertcmdpre)

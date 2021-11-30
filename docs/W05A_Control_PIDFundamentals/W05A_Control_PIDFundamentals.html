@@ -13219,6 +13219,27 @@ s+1+K_p=0
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+<span class="n">t</span> <span class="p">=</span> <span class="mi">0</span><span class="p">:.</span><span class="mi">001</span><span class="p">:</span><span class="mf">1.5</span><span class="p">;</span><span class="c">%go a little past where we said the system should be at steady state</span>
+<span class="n">G1</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">Kp</span> <span class="p">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="n">Gcl</span> <span class="p">=</span> <span class="n">G1</span><span class="o">*</span><span class="n">Kp</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">G1</span><span class="o">*</span><span class="n">Kp</span><span class="p">);</span>
+
+<span class="p">[</span><span class="n">ysim</span><span class="p">,</span><span class="n">tsim</span><span class="p">]=</span><span class="n">step</span><span class="p">(</span><span class="n">Gcl</span><span class="p">,</span><span class="n">t</span><span class="p">);</span><span class="c">%simulate without plotting so we store variables.</span>
+
+<span class="nb">figure</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">tsim</span><span class="p">,</span><span class="n">ysim</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;System Output (?)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13258,6 +13279,26 @@ s+1+K_p=0
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">%create our TF from e to y</span>
+<span class="n">G_e_y</span> <span class="p">=</span> <span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="c">%now see how it responds to a step input</span>
+
+<span class="p">[</span><span class="n">yey</span><span class="p">,</span><span class="n">tey</span><span class="p">]</span> <span class="p">=</span> <span class="n">step</span><span class="p">(</span><span class="n">G_e_y</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+
+<span class="nb">figure</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">yey</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;tracking error&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13348,6 +13389,17 @@ s+1+K_p=0
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13461,6 +13513,17 @@ s+1+K_p=0
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">

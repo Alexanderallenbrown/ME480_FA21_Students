@@ -13112,6 +13112,17 @@ div#notebook {
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">%%html</span>
+<span class="o">&lt;</span><span class="n">iframe</span> <span class="n">id</span><span class="p">=</span><span class="s">&quot;inlineFrameExample&quot;</span> <span class="nb">title</span><span class="p">=</span><span class="s">&quot;Inline Frame Example&quot;</span> <span class="n">width</span><span class="p">=</span><span class="s">&quot;1000&quot;</span> <span class="n">height</span><span class="p">=</span><span class="s">&quot;900&quot;</span> <span class="n">src</span><span class="p">=</span><span class="s">&quot;https://workbench.lafayette.edu/~brownaa/ME480/glassgrab_sim/glassgrabpd_plot_sinusoid.html&quot;</span><span class="o">&gt;</span> <span class="o">&lt;/</span><span class="n">iframe</span><span class="o">&gt;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13175,6 +13186,30 @@ $$y_p(t) = Y \sin(\omega t + \phi)$$<p>Where $Y$ is the <em>scalar magnitude</em
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+<span class="c">%set up the system we wish to simulate</span>
+<span class="n">P</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="c">%set up the input signal we will give to the system</span>
+<span class="n">w</span> <span class="p">=</span> <span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="nb">pi</span><span class="p">;</span>
+<span class="n">t</span> <span class="p">=</span> <span class="nb">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+<span class="n">U</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span><span class="c">%unity sinusoidal input</span>
+<span class="n">u</span> <span class="p">=</span> <span class="n">U</span><span class="o">*</span><span class="nb">sin</span><span class="p">(</span><span class="n">w</span><span class="o">*</span><span class="n">t</span><span class="p">);</span><span class="c">%sinusoidal input</span>
+<span class="c">%now simulate the system response to this input</span>
+<span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">]</span> <span class="p">=</span> <span class="n">lsim</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">t</span><span class="p">);</span>
+<span class="c">%now plot the input and output together to compare</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&#39;input&#39;</span><span class="p">,</span><span class="s">&#39;output&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;input and response&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13365,6 +13400,17 @@ $$\phi(j\omega) = \angle(P(j\omega)) = \tan^{-1}\frac{0}{1} - \tan^{-1}\frac{\fr
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13393,6 +13439,17 @@ $$\phi(j\omega) = \angle(P(j\omega)) = \tan^{-1}\frac{0}{1} - \tan^{-1}\frac{\fr
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13421,6 +13478,17 @@ $$\phi(j\omega) = \angle(P(j\omega)) = \tan^{-1}\frac{0}{1} - \tan^{-1}\frac{\fr
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13449,6 +13517,17 @@ $$\phi(j\omega) = \angle(P(j\omega)) = \tan^{-1}\frac{0}{1} - \tan^{-1}\frac{\fr
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">

@@ -13235,6 +13235,19 @@ $$\sigma_a = \frac{\sum poles -\sum zeros}{n-m} = \frac{(-1)(-2)(-3)}{3} = -2$$<
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+
+<span class="n">GH</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">((</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">rlocus</span><span class="p">(</span><span class="n">GH</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13254,69 +13267,38 @@ Transfer function &#39;GH&#39; from input &#39;u1&#39; to output ...
       s^3 + 6 s^2 + 11 s + 6
 
 Continuous-time model.
-                                                                                                                                 
-                                                               Root Locus of GH                                                  
-                                                                                                                                 
-                  |----------------------------------------------------------------------------------------------------------|   
-                  |       +                    +                   +                    +            +------------------*---+|   
-                  |       *                    *                   *                    *            |###?###asymptotes*    ||   
-                  |       *                    *                   *                    *            |%%%?%%%locus   **&amp;&amp;   ||   
-                  |       *                    *                   *                    *            +---B---open loop poles+|   
-                  |       *                    *                   *                    *                   *      * &amp;&amp;      |   
-                  |       *                    *                   *                    *                   *     * &amp;&amp;       |   
-                  |       *                    *                   *                    *                   *    * &amp;&amp;        |   
-                2 |-+*********************************************************************************************&amp;&amp;*******+-|   
-                  |       *                    *                   *                    *                   * *  &amp;&amp;          |   
-                  |       *                    *                   *                    *                   **  &amp;&amp;           |   
-                  |       *                    *                   *                    *                   *  &amp;&amp;            |   
-                  |       *                    *                   *                    *                  ** &amp;&amp;             |   
-                  |       *                    *                   *                    *                 * *&amp;               |   
-                  |       *                    *                   *                    *               **  &amp;&amp;               |   
-                  |       *                    *                   *                    *              *   &amp;*                |   
-                  |       *                    *                   *                    *             *   &amp;&amp;*                |   
-                  |       *                    *                   *                    *            *   &amp;&amp; *                |   
-                1 |-+***********************************************************************************&amp;&amp;*****************+-|   
-                  |       *                    *                   *                    *          *   &amp;&amp;   *                |   
-                  |       *                    *                   *                    *        **    &amp;    *                |   
-                  |       *                    *                   *                    *       *     &amp;     *                |   
-                  |       *                    *                   *                    *      *     &amp;&amp;     *                |   
-                  |       *                    *                   *                    *     *      &amp;      *                |   
-                  |       *                    *                   *                    *    *      &amp;&amp;      *                |   
-                  |       *                    *                   *                    *  **       &amp;       *                |   
-                  |       *                    *                   *                    * *         &amp;       *                |   
-                  |       *                    *                   *                    **          &amp;       *                |   
-                0 |####%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%B####################B@@@@@@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;B**************+-|   
-                  |       *                    *                   *                    * $         @       *                |   
-                  |       *                    *                   *                    *  $$       @       *                |   
-                  |       *                    *                   *                    *    $      @       *                |   
-                  |       *                    *                   *                    *     $     @@      *                |   
-                  |       *                    *                   *                    *      $     @      *                |   
-                  |       *                    *                   *                    *       $    @@     *                |   
-                  |       *                    *                   *                    *        $$   @     *                |   
-                  |       *                    *                   *                    *          $   @    *                |   
-                  |       *                    *                   *                    *           $  @@   *                |   
-               -1 |-+********************************************************************************$**@@*****************+-|   
-                  |       *                    *                   *                    *             $  @@ *                |   
-                  |       *                    *                   *                    *              $  @@*                |   
-                  |       *                    *                   *                    *               $$ @*                |   
-                  |       *                    *                   *                    *                 $ @@               |   
-                  |       *                    *                   *                    *                  $*@               |   
-                  |       *                    *                   *                    *                   $ @@             |   
-                  |       *                    *                   *                    *                   *$ @@            |   
-                  |       *                    *                   *                    *                   * $ @@           |   
-                  |       *                    *                   *                    *                   *  $$@@          |   
-               -2 |-+********************************************************************************************$@@*******+-|   
-                  |       *                    *                   *                    *                   *     $@@        |   
-                  |       *                    *                   *                    *                   *      $@@       |   
-                  |       *                    *                   *                    *                   *       $@@      |   
-                  |       *                    *                   *                    *                   *        $@@     |   
-                  |       *                    *                   *                    *                   *          @@    |   
-                  |       *                    *                   *                    *                   *           $    |   
-                  |       +                    +                   +                    +                   +                |   
-                  |----------------------------------------------------------------------------------------------------------|   
-                         -5                   -4                  -3                   -2                  -1                    
-                                                        Real Axis     gain = [0, 28.5]                                           
-                                                                                                                                 
+                                                                                                                           
+                                                            Root Locus of GH                                               
+                                                                                                                           
+                  |----------------------------------------------------------------------------------------------------|   
+                  |       +                  +                  +                   +          +----------------**&amp;---+|   
+                  |       *                  *                  *                   *          |###?###asymptote&amp;&amp;    ||   
+                  |       *                  *                  *                   *          |%%%?%%%locus*&amp;&amp;&amp;      ||   
+                2 |-+**************************************************************************+---B---open loop poles+|   
+                  |       *                  *                  *                   *                *** &amp;&amp;&amp;           |   
+                  |       *                  *                  *                   *              **  &amp;&amp;              |   
+                  |       *                  *                  *                   *           ***  &amp;&amp;*               |   
+                1 |-+******************************************************************************&amp;&amp;&amp;***************+-|   
+                  |       *                  *                  *                   *      ***   &amp;&amp;&amp;   *               |   
+                  |       *                  *                  *                   *   ***     &amp;&amp;     *               |   
+                  |       *                  *                  *                   * **       &amp;&amp;      *               |   
+                0 |####%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%B###################B@@@@@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;B*************+-|   
+                  |       *                  *                  *                   *   $$     @       *               |   
+                  |       *                  *                  *                   *     $$$  @@      *               |   
+                  |       *                  *                  *                   *        $$ @@     *               |   
+                  |       *                  *                  *                   *          $$@@@   *               |   
+               -1 |-+*****************************************************************************$@@@***************+-|   
+                  |       *                  *                  *                   *               $@@*               |   
+                  |       *                  *                  *                   *                 $@@              |   
+                  |       *                  *                  *                   *                  * @@@           |   
+               -2 |-+**************************************************************************************@@@*******+-|   
+                  |       *                  *                  *                   *                  *     @@@       |   
+                  |       *                  *                  *                   *                  *        @@     |   
+                  |       +                  +                  +                   +                  +          @    |   
+                  |----------------------------------------------------------------------------------------------------|   
+                         -5                 -4                 -3                  -2                 -1                   
+                                                     Real Axis     gain = [0, 28.5]                                        
+                                                                                                                           
 </pre>
 </div>
 </div>
@@ -13404,6 +13386,34 @@ $$6(1-11)+10K_{crit}=0$$<p>Which gives us $K_{crit}=6$. Now we know <strong>the 
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+
+<span class="c">%set up the open loop TF</span>
+<span class="n">GH</span> <span class="p">=</span> <span class="mi">10</span><span class="o">/</span><span class="p">((</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">3</span><span class="p">))</span>
+<span class="c">%plot the root locus, set hold on</span>
+<span class="n">rlocus</span><span class="p">(</span><span class="n">GH</span><span class="p">,.</span><span class="mi">01</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">on</span> 
+
+<span class="c">%now calculate our eigenvalues at our calculated critical gain so we can see if we were right!</span>
+<span class="n">Kcrit</span> <span class="p">=</span> <span class="mi">6</span><span class="p">;</span><span class="c">%this is what we calculated by hand</span>
+<span class="c">%compute closed loop TF</span>
+<span class="n">Gcl</span> <span class="p">=</span> <span class="n">minreal</span><span class="p">(</span><span class="n">Kcrit</span><span class="o">*</span><span class="n">GH</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">Kcrit</span><span class="o">*</span><span class="n">GH</span><span class="p">));</span>
+<span class="c">%pull out the denominator</span>
+<span class="p">[</span><span class="n">num</span><span class="p">,</span><span class="n">den</span><span class="p">]</span> <span class="p">=</span> <span class="n">tfdata</span><span class="p">(</span><span class="n">Gcl</span><span class="p">,</span><span class="s">&#39;v&#39;</span><span class="p">);</span>
+<span class="c">%find the roots of the characteristic equation</span>
+<span class="n">myroots</span> <span class="p">=</span> <span class="nb">roots</span><span class="p">(</span><span class="n">den</span><span class="p">);</span>
+
+<span class="c">%plot those roots on our root locus plot</span>
+<span class="nb">plot</span><span class="p">(</span><span class="nb">real</span><span class="p">(</span><span class="n">myroots</span><span class="p">),</span><span class="nb">imag</span><span class="p">(</span><span class="n">myroots</span><span class="p">),</span><span class="s">&#39;c.&#39;</span><span class="p">,</span><span class="s">&#39;MarkerSize&#39;</span><span class="p">,</span><span class="mi">30</span><span class="p">)</span><span class="c">%make them huge so we can see them!</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13423,195 +13433,102 @@ Transfer function &#39;GH&#39; from input &#39;u1&#39; to output ...
       s^3 + 6 s^2 + 11 s + 6
 
 Continuous-time model.
-                                                                                                                                 
-                                                               Root Locus of GH                                                  
-                                                                                                                                 
-                  |----------------------------------------------------------------------------------------------------------|   
-                  |    +               +               +               +                +            +-------------------*--+|   
-                  |    *               *               *               *                *            |###?###asymptotes**   ||   
-                  |    *               *               *               *                *            |%%%?%%%locus    *&amp;&amp;   ||   
-                  |    *               *               *               *                *            +---B---open loop poles+|   
-                3 |-+************************************************************************************************&amp;&amp;****+-|   
-                  |    *               *               *               *                *               *          *&amp;&amp;  *    |   
-                  |    *               *               *               *                *               *        *&amp;&amp;&amp;   *    |   
-                  |    *               *               *               *                *               *       *&amp;&amp;     *    |   
-                  |    *               *               *               *                *               *      *&amp;&amp;      *    |   
-                  |    *               *               *               *                *               *     *&amp;&amp;       *    |   
-                  |    *               *               *               *                *               *    *&amp;&amp;        *    |   
-                  |    *               *               *               *                *               *  **&amp;&amp;         *    |   
-                2 |-+***************************************************************************************&amp;&amp;*************+-|   
-                  |    *               *               *               *                *               ** &amp;&amp;           *    |   
-                  |    *               *               *               *                *               * &amp;&amp;            *    |   
-                  |    *               *               *               *                *             ***&amp;&amp;             *    |   
-                  |    *               *               *               *                *            *  &amp;&amp;              *    |   
-                  |    *               *               *               *                *           *  &amp;&amp;               *    |   
-                  |    *               *               *               *                *          *  &amp;&amp;*               *    |   
-                1 |-+********************************************************************************&amp;&amp;********************+-|   
-                  |    *               *               *               *                *       **  &amp;&amp;  *               *    |   
-                  |    *               *               *               *                *      *   &amp;&amp;   *               *    |   
-                  |    *               *               *               *                *     *    &amp;    *               *    |   
-                  |    *               *               *               *                *    *    &amp;     *               *    |   
-                  |    *               *               *               *                *   *     &amp;     *               *    |   
-                  |    *               *               *               *                * **     &amp;      *               *    |   
-                  |    *               *               *               *                **       &amp;      *               *    |   
-                0 |####%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%B################B@@@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;B******************+-|   
-                  |    *               *               *               *                * $$     @      *               *    |   
-                  |    *               *               *               *                *   $    @      *               *    |   
-                  |    *               *               *               *                *    $    @     *               *    |   
-                  |    *               *               *               *                *     $   @     *               *    |   
-                  |    *               *               *               *                *      $   @    *               *    |   
-                  |    *               *               *               *                *       $$ @@   *               *    |   
-                  |    *               *               *               *                *         $ @@  *               *    |   
-               -1 |-+******************************************************************************$*@@********************+-|   
-                  |    *               *               *               *                *           $ @@*               *    |   
-                  |    *               *               *               *                *            $ @@               *    |   
-                  |    *               *               *               *                *             $$@@              *    |   
-                  |    *               *               *               *                *               $@@             *    |   
-                  |    *               *               *               *                *               *$@@            *    |   
-                  |    *               *               *               *                *               * $@@           *    |   
-               -2 |-+**************************************************************************************$@@*************+-|   
-                  |    *               *               *               *                *               *    @@         *    |   
-                  |    *               *               *               *                *               *     @@        *    |   
-                  |    *               *               *               *                *               *      @@       *    |   
-                  |    *               *               *               *                *               *       @@      *    |   
-                  |    *               *               *               *                *               *        @@     *    |   
-                  |    *               *               *               *                *               *         @@@   *    |   
-                  |    *               *               *               *                *               *           @@  *    |   
-               -3 |-+************************************************************************************************@@****+-|   
-                  |    *               *               *               *                *               *             @@*    |   
-                  |    *               *               *               *                *               *              @@    |   
-                  |    *               *               *               *                *               *               *$   |   
-                  |    +               +               +               +                +               +               +    |   
-                  |----------------------------------------------------------------------------------------------------------|   
-                      -6              -5              -4              -3               -2              -1               0        
-                                                       Real Axis     gain = [0, 5.98998]                                         
-                                                                                                                                 
-                                                                                                                                 
-                                                               Root Locus of GH                                                  
-                                                                                                                                 
-                  |----------------------------------------------------------------------------------------------------------|   
-                  |    +               +               +               +                +            +-------------------*--+|   
-                  |    *               *               *               *                *            |###?###asymptotes**   ||   
-                  |    *               *               *               *                *            |%%%?%%%locus    *&amp;&amp;   ||   
-                  |    *               *               *               *                *            +---B---open loop poles+|   
-                3 |-+************************************************************************************************&amp;&amp;****+-|   
-                  |    *               *               *               *                *               *          *&amp;&amp;  *    |   
-                  |    *               *               *               *                *               *        *&amp;&amp;&amp;   *    |   
-                  |    *               *               *               *                *               *       *&amp;&amp;     *    |   
-                  |    *               *               *               *                *               *      *&amp;&amp;      *    |   
-                  |    *               *               *               *                *               *     *&amp;&amp;       *    |   
-                  |    *               *               *               *                *               *    *&amp;&amp;        *    |   
-                  |    *               *               *               *                *               *  **&amp;&amp;         *    |   
-                2 |-+***************************************************************************************&amp;&amp;*************+-|   
-                  |    *               *               *               *                *               ** &amp;&amp;           *    |   
-                  |    *               *               *               *                *               * &amp;&amp;            *    |   
-                  |    *               *               *               *                *             ***&amp;&amp;             *    |   
-                  |    *               *               *               *                *            *  &amp;&amp;              *    |   
-                  |    *               *               *               *                *           *  &amp;&amp;               *    |   
-                  |    *               *               *               *                *          *  &amp;&amp;*               *    |   
-                1 |-+********************************************************************************&amp;&amp;********************+-|   
-                  |    *               *               *               *                *       **  &amp;&amp;  *               *    |   
-                  |    *               *               *               *                *      *   &amp;&amp;   *               *    |   
-                  |    *               *               *               *                *     *    &amp;    *               *    |   
-                  |    *               *               *               *                *    *    &amp;     *               *    |   
-                  |    *               *               *               *                *   *     &amp;     *               *    |   
-                  |    *               *               *               *                * **     &amp;      *               *    |   
-                  |    *               *               *               *                **       &amp;      *               *    |   
-                0 |####%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%B################B@@@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;B******************+-|   
-                  |    *               *               *               *                * $$     @      *               *    |   
-                  |    *               *               *               *                *   $    @      *               *    |   
-                  |    *               *               *               *                *    $    @     *               *    |   
-                  |    *               *               *               *                *     $   @     *               *    |   
-                  |    *               *               *               *                *      $   @    *               *    |   
-                  |    *               *               *               *                *       $$ @@   *               *    |   
-                  |    *               *               *               *                *         $ @@  *               *    |   
-               -1 |-+******************************************************************************$*@@********************+-|   
-                  |    *               *               *               *                *           $ @@*               *    |   
-                  |    *               *               *               *                *            $ @@               *    |   
-                  |    *               *               *               *                *             $$@@              *    |   
-                  |    *               *               *               *                *               $@@             *    |   
-                  |    *               *               *               *                *               *$@@            *    |   
-                  |    *               *               *               *                *               * $@@           *    |   
-               -2 |-+**************************************************************************************$@@*************+-|   
-                  |    *               *               *               *                *               *    @@         *    |   
-                  |    *               *               *               *                *               *     @@        *    |   
-                  |    *               *               *               *                *               *      @@       *    |   
-                  |    *               *               *               *                *               *       @@      *    |   
-                  |    *               *               *               *                *               *        @@     *    |   
-                  |    *               *               *               *                *               *         @@@   *    |   
-                  |    *               *               *               *                *               *           @@  *    |   
-               -3 |-+************************************************************************************************@@****+-|   
-                  |    *               *               *               *                *               *             @@*    |   
-                  |    *               *               *               *                *               *              @@    |   
-                  |    *               *               *               *                *               *               *$   |   
-                  |    +               +               +               +                +               +               +    |   
-                  |----------------------------------------------------------------------------------------------------------|   
-                      -6              -5              -4              -3               -2              -1               0        
-                                                       Real Axis     gain = [0, 5.98998]                                         
-                                                                                                                                 
-                                                                                                                                 
-                                                               Root Locus of GH                                                  
-                                                                                                                                 
-                  |----------------------------------------------------------------------------------------------------------|   
-                  |    +               +               +               +                +            +-------------------*--+|   
-                  |    #               #               #               #                #            |###?###asymptotes**   ||   
-                  |    #               #               #               #                #            |%%%?%%%locus    *&amp;G   ||   
-                  |    #               #               #               #                #            +---B---open loop poles+|   
-                3 |-+###############################################################################################*&amp;&amp;####+-|   
-                  |    #               #               #               #                #               #          *&amp;&amp;  #    |   
-                  |    #               #               #               #                #               #        *&amp;&amp;&amp;   #    |   
-                  |    #               #               #               #                #               #       *&amp;&amp;     #    |   
-                  |    #               #               #               #                #               #      *&amp;&amp;      #    |   
-                  |    #               #               #               #                #               #     *&amp;&amp;       #    |   
-                  |    #               #               #               #                #               #    *&amp;&amp;        #    |   
-                  |    #               #               #               #                #               #  **&amp;&amp;         #    |   
-                2 |-+#####################################################################################*#&amp;&amp;#############+-|   
-                  |    #               #               #               #                #               #* &amp;&amp;           #    |   
-                  |    #               #               #               #                #               * &amp;&amp;            #    |   
-                  |    #               #               #               #                #             **#&amp;&amp;             #    |   
-                  |    #               #               #               #                #            *  &amp;&amp;              #    |   
-                  |    #               #               #               #                #           *  &amp;&amp;               #    |   
-                  |    #               #               #               #                #          *  &amp;&amp;#               #    |   
-                1 |-+#############################################################################*##&amp;&amp;####################+-|   
-                  |    #               #               #               #                #       **  &amp;&amp;  #               #    |   
-                  |    #               #               #               #                #      *   &amp;&amp;   #               #    |   
-                  |    #               #               #               #                #     *    &amp;    #               #    |   
-                  |    #               #               #               #                #    *    &amp;     #               #    |   
-                  |    #               #               #               #                #   *     &amp;     #               #    |   
-                  |    #               #               #               #                # **     &amp;      #               #    |   
-                  |    #               #               #               #                #*       &amp;      #               #    |   
-                0 |####G%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%B################B@@@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;&amp;B##################+-|   
-                  |    #               #               #               #                # $$     @      #               #    |   
-                  |    #               #               #               #                #   $    @      #               #    |   
-                  |    #               #               #               #                #    $    @     #               #    |   
-                  |    #               #               #               #                #     $   @     #               #    |   
-                  |    #               #               #               #                #      $   @    #               #    |   
-                  |    #               #               #               #                #       $$ @@   #               #    |   
-                  |    #               #               #               #                #         $ @@  #               #    |   
-               -1 |-+##############################################################################$#@@####################+-|   
-                  |    #               #               #               #                #           $ @@#               #    |   
-                  |    #               #               #               #                #            $ @@               #    |   
-                  |    #               #               #               #                #             $$@@              #    |   
-                  |    #               #               #               #                #               $@@             #    |   
-                  |    #               #               #               #                #               #$@@            #    |   
-                  |    #               #               #               #                #               # $@@           #    |   
-               -2 |-+######################################################################################$@@#############+-|   
-                  |    #               #               #               #                #               #    @@         #    |   
-                  |    #               #               #               #                #               #     @@        #    |   
-                  |    #               #               #               #                #               #      @@       #    |   
-                  |    #               #               #               #                #               #       @@      #    |   
-                  |    #               #               #               #                #               #        @@     #    |   
-                  |    #               #               #               #                #               #         @@@   #    |   
-                  |    #               #               #               #                #               #           @@  #    |   
-               -3 |-+################################################################################################@@####+-|   
-                  |    #               #               #               #                #               #             @@#    |   
-                  |    #               #               #               #                #               #              @G    |   
-                  |    #               #               #               #                #               #               #$   |   
-                  |    +               +               +               +                +               +               +    |   
-                  |----------------------------------------------------------------------------------------------------------|   
-                      -6              -5              -4              -3               -2              -1               0        
-                                                       Real Axis     gain = [0, 5.98998]                                         
-                                                                                                                                 
+                                                                                                                           
+                                                            Root Locus of GH                                               
+                                                                                                                           
+                  |----------------------------------------------------------------------------------------------------|   
+                  |    +              +              +              +               +          +----------------**&amp;---+|   
+                3 |-+**************************************************************************|###?###asymptot&amp;&amp;&amp;   +||   
+                  |    *              *              *              *               *          |%%%?%%%locus*&amp;&amp;&amp;      ||   
+                  |    *              *              *              *               *          +---B---open loop poles+|   
+                  |    *              *              *              *               *              *  **&amp;&amp;&amp;       *    |   
+                2 |-+*********************************************************************************&amp;&amp;&amp;************+-|   
+                  |    *              *              *              *               *           ***&amp;&amp;&amp;&amp;           *    |   
+                  |    *              *              *              *               *         ** &amp;&amp;&amp;              *    |   
+                1 |-+***************************************************************************&amp;&amp;*******************+-|   
+                  |    *              *              *              *               *   ***   &amp;&amp;   *              *    |   
+                  |    *              *              *              *               * **     &amp;&amp;    *              *    |   
+                0 |####%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%B###############B@@@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;B*****************+-|   
+                  |    *              *              *              *               *   $$$  @     *              *    |   
+                  |    *              *              *              *               *      $$@@    *              *    |   
+                  |    *              *              *              *               *        $@@   *              *    |   
+               -1 |-+***************************************************************************@@*******************+-|   
+                  |    *              *              *              *               *            @@@              *    |   
+                  |    *              *              *              *               *              @@@@           *    |   
+               -2 |-+*********************************************************************************@@@************+-|   
+                  |    *              *              *              *               *              *    @@@$      *    |   
+                  |    *              *              *              *               *              *      @@@@    *    |   
+                  |    *              *              *              *               *              *         @@@$ *    |   
+               -3 |-+******************************************************************************************@@@$**+-|   
+                  |    +              +              +              +               +              +              @$   |   
+                  |----------------------------------------------------------------------------------------------------|   
+                      -6             -5             -4             -3              -2             -1              0        
+                                                    Real Axis     gain = [0, 5.98998]                                      
+                                                                                                                           
+                                                                                                                           
+                                                            Root Locus of GH                                               
+                                                                                                                           
+                  |----------------------------------------------------------------------------------------------------|   
+                  |    +              +              +              +               +          +----------------**&amp;---+|   
+                3 |-+**************************************************************************|###?###asymptot&amp;&amp;&amp;   +||   
+                  |    *              *              *              *               *          |%%%?%%%locus*&amp;&amp;&amp;      ||   
+                  |    *              *              *              *               *          +---B---open loop poles+|   
+                  |    *              *              *              *               *              *  **&amp;&amp;&amp;       *    |   
+                2 |-+*********************************************************************************&amp;&amp;&amp;************+-|   
+                  |    *              *              *              *               *           ***&amp;&amp;&amp;&amp;           *    |   
+                  |    *              *              *              *               *         ** &amp;&amp;&amp;              *    |   
+                1 |-+***************************************************************************&amp;&amp;*******************+-|   
+                  |    *              *              *              *               *   ***   &amp;&amp;   *              *    |   
+                  |    *              *              *              *               * **     &amp;&amp;    *              *    |   
+                0 |####%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%B###############B@@@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;B*****************+-|   
+                  |    *              *              *              *               *   $$$  @     *              *    |   
+                  |    *              *              *              *               *      $$@@    *              *    |   
+                  |    *              *              *              *               *        $@@   *              *    |   
+               -1 |-+***************************************************************************@@*******************+-|   
+                  |    *              *              *              *               *            @@@              *    |   
+                  |    *              *              *              *               *              @@@@           *    |   
+               -2 |-+*********************************************************************************@@@************+-|   
+                  |    *              *              *              *               *              *    @@@$      *    |   
+                  |    *              *              *              *               *              *      @@@@    *    |   
+                  |    *              *              *              *               *              *         @@@$ *    |   
+               -3 |-+******************************************************************************************@@@$**+-|   
+                  |    +              +              +              +               +              +              @$   |   
+                  |----------------------------------------------------------------------------------------------------|   
+                      -6             -5             -4             -3              -2             -1              0        
+                                                    Real Axis     gain = [0, 5.98998]                                      
+                                                                                                                           
+                                                                                                                           
+                                                            Root Locus of GH                                               
+                                                                                                                           
+                  |----------------------------------------------------------------------------------------------------|   
+                  |    +              +              +              +               +          +----------------**G---+|   
+                3 |-+##########################################################################|###?###asymptot&amp;&amp;&amp;   +||   
+                  |    #              #              #              #               #          |%%%?%%%locus*&amp;&amp;&amp;      ||   
+                  |    #              #              #              #               #          +---B---open loop poles+|   
+                  |    #              #              #              #               #              #  **&amp;&amp;&amp;       #    |   
+                2 |-+##############################################################################***&amp;&amp;&amp;############+-|   
+                  |    #              #              #              #               #           ***&amp;&amp;&amp;&amp;           #    |   
+                  |    #              #              #              #               #         ** &amp;&amp;&amp;              #    |   
+                1 |-+######################################################################***##&amp;&amp;###################+-|   
+                  |    #              #              #              #               #   ***   &amp;&amp;   #              #    |   
+                  |    #              #              #              #               # **     &amp;&amp;    #              #    |   
+                0 |####G%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%B###############B@@@@@@@@&amp;&amp;&amp;&amp;&amp;&amp;B#################+-|   
+                  |    #              #              #              #               #   $$$  @     #              #    |   
+                  |    #              #              #              #               #      $$@@    #              #    |   
+                  |    #              #              #              #               #        $@@   #              #    |   
+               -1 |-+###########################################################################@@###################+-|   
+                  |    #              #              #              #               #            @@@              #    |   
+                  |    #              #              #              #               #              @@@@           #    |   
+               -2 |-+#################################################################################@@@############+-|   
+                  |    #              #              #              #               #              #    @@@$      #    |   
+                  |    #              #              #              #               #              #      @@@@    #    |   
+                  |    #              #              #              #               #              #         @@@$ #    |   
+               -3 |-+##########################################################################################@@@$##+-|   
+                  |    +              +              +              +               +              +              G$   |   
+                  |----------------------------------------------------------------------------------------------------|   
+                      -6             -5             -4             -3              -2             -1              0        
+                                                    Real Axis     gain = [0, 5.98998]                                      
+                                                                                                                           
 </pre>
 </div>
 </div>
@@ -13695,6 +13612,17 @@ $$\theta_a = \frac{2k+1}{n-m}\pi$$</li>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13731,6 +13659,17 @@ $$\theta_a = \frac{2k+1}{n-m}\pi$$</li>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13752,6 +13691,16 @@ $$\theta_a = \frac{2k+1}{n-m}\pi$$</li>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
     </div>

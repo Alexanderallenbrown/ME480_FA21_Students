@@ -13136,6 +13136,22 @@ div#notebook {
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">clear</span> <span class="nb">all</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+
+<span class="n">P1</span> <span class="p">=</span> <span class="mi">10</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">P2</span> <span class="p">=</span> <span class="mi">10</span><span class="o">/</span><span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">bode</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span><span class="n">P2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13199,6 +13215,35 @@ $$\lim_{\omega\rightarrow\infty}\log_{10}\left|P_1(s)\right| = \log_{10}\frac{A}
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">A</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">a</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">P1</span> <span class="p">=</span> <span class="n">A</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">a</span><span class="p">);</span>
+<span class="p">[</span><span class="n">mag1</span><span class="p">,</span><span class="n">phase1</span><span class="p">,</span><span class="n">w1</span><span class="p">]</span> <span class="p">=</span> <span class="n">bode</span><span class="p">(</span><span class="n">P1</span><span class="p">);</span><span class="c">%doesn&#39;t plot. We&#39;ll have to do that</span>
+<span class="c">%find frequencies less than the eigenvalue</span>
+<span class="n">lowfreq</span> <span class="p">=</span> <span class="n">w1</span><span class="p">(</span><span class="nb">find</span><span class="p">(</span><span class="n">w1</span><span class="o">&lt;</span><span class="p">=</span><span class="n">a</span><span class="p">));</span>
+<span class="c">%find frequencies higher than the eigenvalue</span>
+<span class="n">highfreq</span> <span class="p">=</span> <span class="n">w1</span><span class="p">(</span><span class="nb">find</span><span class="p">(</span><span class="n">w1</span><span class="o">&gt;</span><span class="p">=</span><span class="n">a</span><span class="p">));</span>
+<span class="c">%compute the two asymptotes, converting to decibels</span>
+<span class="n">asymp_high</span> <span class="p">=</span> <span class="mi">20</span><span class="o">*</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">A</span><span class="o">/</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="n">log10</span><span class="p">(</span><span class="n">highfreq</span><span class="p">)</span> <span class="o">-</span> <span class="n">log10</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">a</span><span class="p">));</span>
+<span class="n">asymp_low</span> <span class="p">=</span> <span class="mi">20</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">A</span><span class="o">/</span><span class="n">a</span><span class="p">)</span><span class="o">*</span><span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">lowfreq</span><span class="p">))</span> <span class="p">;</span>
+<span class="c">%plot results</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">w1</span><span class="p">,</span><span class="mi">20</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">mag1</span><span class="p">))</span>
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">lowfreq</span><span class="p">,</span><span class="n">asymp_low</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">highfreq</span><span class="p">,</span><span class="n">asymp_high</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">20</span> <span class="mi">30</span><span class="p">])</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;frequency (rad/s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Magnitude (dB)&#39;</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&#39;MATLAB&#39;</span><span class="p">,</span><span class="s">&#39;Low Freq Asymptote&#39;</span><span class="p">,</span><span class="s">&#39;High Freq Asymptote&#39;</span><span class="p">)</span>
+<span class="nb">grid</span> <span class="n">on</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13258,6 +13303,37 @@ $$\lim_{\omega\rightarrow \infty}\left|P_2(j\omega)\right|=\log_{10}K - 2\log_{1
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+<span class="n">wn</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">zeta</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">K</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">P2</span> <span class="p">=</span> <span class="n">K</span><span class="o">*</span><span class="n">wn</span>^<span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">zeta</span><span class="o">*</span><span class="n">wn</span><span class="o">*</span><span class="n">s</span><span class="o">+</span><span class="n">wn</span>^<span class="mi">2</span><span class="p">);</span>
+<span class="p">[</span><span class="n">mag2</span><span class="p">,</span><span class="n">phase2</span><span class="p">,</span><span class="n">w2</span><span class="p">]</span> <span class="p">=</span> <span class="n">bode</span><span class="p">(</span><span class="n">P2</span><span class="p">);</span><span class="c">%doesn&#39;t plot. We&#39;ll have to do that</span>
+<span class="c">%find frequencies less than the eigenvalue</span>
+<span class="n">lowfreq</span> <span class="p">=</span> <span class="n">w2</span><span class="p">(</span><span class="nb">find</span><span class="p">(</span><span class="n">w2</span><span class="o">&lt;</span><span class="p">=</span><span class="n">wn</span><span class="p">));</span>
+<span class="c">%find frequencies higher than the eigenvalue</span>
+<span class="n">highfreq</span> <span class="p">=</span> <span class="n">w2</span><span class="p">(</span><span class="nb">find</span><span class="p">(</span><span class="n">w2</span><span class="o">&gt;</span><span class="p">=</span><span class="n">wn</span><span class="p">));</span>
+<span class="c">%compute the two asymptotes, converting to decibels</span>
+<span class="n">asymp_high</span> <span class="p">=</span> <span class="mi">20</span><span class="o">*</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">K</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">highfreq</span><span class="p">)</span> <span class="o">+</span> <span class="n">log10</span><span class="p">(</span><span class="n">wn</span><span class="p">));</span>
+<span class="n">asymp_low</span> <span class="p">=</span> <span class="mi">20</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">K</span><span class="p">)</span><span class="o">*</span><span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">lowfreq</span><span class="p">))</span> <span class="p">;</span>
+<span class="c">%plot results</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">w2</span><span class="p">,</span><span class="mi">20</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">mag2</span><span class="p">))</span>
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">lowfreq</span><span class="p">,</span><span class="n">asymp_low</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">highfreq</span><span class="p">,</span><span class="n">asymp_high</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">40</span> <span class="mi">30</span><span class="p">])</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;frequency (rad/s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Magnitude (dB)&#39;</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&#39;MATLAB&#39;</span><span class="p">,</span><span class="s">&#39;Low Freq Asymptote&#39;</span><span class="p">,</span><span class="s">&#39;High Freq Asymptote&#39;</span><span class="p">)</span>
+<span class="nb">grid</span> <span class="n">on</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13292,6 +13368,41 @@ $$\lim_{\omega\rightarrow \infty}\left|P_2(j\omega)\right|=\log_{10}K - 2\log_{1
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">wn</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">zeta</span> <span class="p">=</span> <span class="mf">0.1</span><span class="p">;</span>
+<span class="n">z</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span><span class="c">%system 1st order zero</span>
+<span class="n">K</span> <span class="p">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">wn</span>^<span class="mi">2</span><span class="o">/</span><span class="n">z</span><span class="p">;</span><span class="c">%system steady state gain is the number in front of wn^2/z</span>
+<span class="n">P3</span> <span class="p">=</span> <span class="n">K</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">z</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">zeta</span><span class="o">*</span><span class="n">wn</span><span class="o">*</span><span class="n">s</span> <span class="o">+</span> <span class="n">wn</span>^<span class="mi">2</span><span class="p">);</span>
+<span class="p">[</span><span class="n">mag3</span><span class="p">,</span><span class="n">phase3</span><span class="p">,</span><span class="n">w3</span><span class="p">]=</span><span class="n">bode</span><span class="p">(</span><span class="n">P3</span><span class="p">);</span>
+<span class="c">%find frequencies less than the zero</span>
+<span class="n">lowfreq</span> <span class="p">=</span> <span class="n">w3</span><span class="p">(</span><span class="nb">find</span><span class="p">(</span><span class="n">w3</span><span class="o">&lt;</span><span class="p">=</span><span class="n">z</span><span class="p">));</span>
+<span class="c">%find frequencies higher than the zero but lower than the eigenvalue</span>
+<span class="n">midfreq</span> <span class="p">=</span> <span class="n">w3</span><span class="p">((</span><span class="n">w3</span><span class="o">&gt;</span><span class="p">=</span><span class="n">z</span><span class="p">));</span>
+<span class="n">midfreq</span> <span class="p">=</span> <span class="n">midfreq</span><span class="p">(</span><span class="n">midfreq</span><span class="o">&lt;</span><span class="p">=</span><span class="n">wn</span><span class="p">);</span>
+<span class="c">%find high frequencies</span>
+<span class="n">highfreq</span> <span class="p">=</span> <span class="n">w3</span><span class="p">(</span><span class="n">w3</span><span class="o">&gt;</span><span class="p">=</span><span class="n">wn</span><span class="p">);</span>
+<span class="c">%compute the three asymptotes, converting to decibels</span>
+<span class="n">asymp_mid</span> <span class="p">=</span> <span class="mi">20</span><span class="o">*</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">K</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="n">wn</span>^<span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">log10</span><span class="p">(</span><span class="n">midfreq</span><span class="p">));</span>
+<span class="n">asymp_high</span> <span class="p">=</span> <span class="mi">20</span><span class="o">*</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">K</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="n">wn</span>^<span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">log10</span><span class="p">(</span><span class="n">wn</span><span class="p">)</span> <span class="o">-</span> <span class="n">log10</span><span class="p">(</span><span class="n">highfreq</span><span class="p">)</span> <span class="o">+</span> <span class="n">log10</span><span class="p">(</span><span class="n">wn</span><span class="p">));</span>
+<span class="n">asymp_low</span> <span class="p">=</span> <span class="mi">20</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">K</span><span class="o">*</span><span class="n">z</span><span class="o">/</span><span class="n">wn</span>^<span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="nb">ones</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">lowfreq</span><span class="p">))</span> <span class="p">;</span>
+<span class="c">%plot results</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">w3</span><span class="p">,</span><span class="mi">20</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">mag3</span><span class="p">))</span>
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">lowfreq</span><span class="p">,</span><span class="n">asymp_low</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">midfreq</span><span class="p">,</span><span class="n">asymp_mid</span><span class="p">,</span><span class="s">&#39;g&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">highfreq</span><span class="p">,</span><span class="n">asymp_high</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="c">%ylim([-40 30])</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;frequency (rad/s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Magnitude (dB)&#39;</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&#39;MATLAB&#39;</span><span class="p">,</span><span class="s">&#39;Low Freq Asymptote&#39;</span><span class="p">,</span><span class="s">&#39;Mid Freq Asymptote&#39;</span><span class="p">,</span><span class="s">&#39;High Freq Asymptote&#39;</span><span class="p">)</span>
+<span class="nb">grid</span> <span class="n">on</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13342,6 +13453,20 @@ $$\lim_{\omega\rightarrow \infty}\left|P_2(j\omega)\right|=\log_{10}K - 2\log_{1
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+<span class="n">A</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">a</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">P1</span> <span class="p">=</span> <span class="n">A</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">a</span><span class="p">);</span>
+<span class="n">bode</span><span class="p">(</span><span class="n">P1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13393,6 +13518,38 @@ $$ m \approx - 1.15 \frac{rad}{log_{10}(\frac{rad}{s})} = -1.15  \frac{rad}{log_
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+<span class="n">A</span> <span class="p">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">a</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">P1</span> <span class="p">=</span> <span class="n">A</span><span class="o">/</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">a</span><span class="p">);</span>
+<span class="p">[</span><span class="n">mag1</span><span class="p">,</span><span class="n">phase1</span><span class="p">,</span><span class="n">w1</span><span class="p">]</span> <span class="p">=</span> <span class="n">bode</span><span class="p">(</span><span class="n">P1</span><span class="p">);</span>
+
+<span class="c">%asymptote will drop 90 degrees in 2 powers of 10 (slope of -1/2) or 45 degrees in 1, centered about the eigenvalue\</span>
+<span class="c">%log(a) - log(freq_low) = 1</span>
+<span class="c">%-&gt; freq_low = 10^(log10(a)-1);</span>
+<span class="n">log_freq_low</span> <span class="p">=</span> <span class="n">a</span><span class="o">/</span><span class="mi">5</span><span class="p">;</span>
+<span class="n">log_freq_high</span> <span class="p">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">a</span><span class="p">;</span>
+<span class="n">log_freq_min</span> <span class="p">=</span> <span class="mi">10</span>^<span class="o">-</span><span class="mi">2</span><span class="p">;</span><span class="c">%minimum we want to plot</span>
+<span class="n">log_freq_max</span> <span class="p">=</span> <span class="mi">10</span>^<span class="mi">2</span><span class="p">;</span><span class="c">%maximum we want to plot</span>
+<span class="n">asymptotic_x</span> <span class="p">=</span> <span class="p">[</span><span class="n">log_freq_min</span> <span class="n">log_freq_low</span> <span class="n">log_freq_high</span> <span class="n">log_freq_max</span><span class="p">];</span>
+<span class="n">asymptotic_y</span> <span class="p">=</span> <span class="p">[</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">90</span> <span class="o">-</span><span class="mi">90</span><span class="p">];</span>
+
+<span class="c">% just for fun, double check the slope is correct! Draw just the tangent line in point-slope form</span>
+<span class="c">%line is in degrees, so we need to scale by 180/pi also</span>
+<span class="n">tangent_line</span> <span class="p">=</span> <span class="mi">180</span><span class="o">/</span><span class="nb">pi</span><span class="o">*</span><span class="p">(</span><span class="nb">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">*-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">log10</span><span class="p">(</span><span class="n">w1</span><span class="p">)</span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">-</span><span class="nb">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">);</span>
+
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">w1</span><span class="p">,</span><span class="n">phase1</span><span class="p">,</span><span class="n">asymptotic_x</span><span class="p">,</span><span class="n">asymptotic_y</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">w1</span><span class="p">,</span><span class="n">tangent_line</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nb">grid</span> <span class="n">on</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13428,6 +13585,51 @@ $$P(s) = \frac{K}{(s+p_1)(s+p_2)\cdots(s+p_n)} = \frac{K_1}{(s+p_1)}+\frac{K_2}{
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">a1</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">a2</span> <span class="p">=</span> <span class="mi">100</span><span class="p">;</span>
+<span class="n">P2</span> <span class="p">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">((</span><span class="n">s</span><span class="o">+</span><span class="n">a1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">a2</span><span class="p">));</span>
+
+<span class="p">[</span><span class="n">mag</span><span class="p">,</span><span class="n">phase</span><span class="p">,</span><span class="n">w</span><span class="p">]</span> <span class="p">=</span> <span class="n">bode</span><span class="p">(</span><span class="n">P2</span><span class="p">);</span>
+
+<span class="c">%asymptotic approximations:</span>
+<span class="c">%for the first pole</span>
+<span class="n">log_freq_low_1</span> <span class="p">=</span> <span class="n">a1</span><span class="o">/</span><span class="mi">5</span><span class="p">;</span>
+<span class="n">log_freq_high_1</span> <span class="p">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">a1</span><span class="p">;</span>
+<span class="n">log_freq_min_1</span> <span class="p">=</span> <span class="mi">10</span>^<span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="c">%minimum we want to plot</span>
+<span class="n">log_freq_max_1</span> <span class="p">=</span> <span class="mi">10</span>^<span class="mi">3</span><span class="p">;</span><span class="c">%maximum we want to plot</span>
+<span class="n">asymptotic_x_1</span> <span class="p">=</span> <span class="p">[</span><span class="n">log_freq_min_1</span> <span class="n">log_freq_low_1</span> <span class="n">log_freq_high_1</span> <span class="n">log_freq_max_1</span><span class="p">];</span>
+<span class="n">asymptotic_y_1</span> <span class="p">=</span> <span class="p">[</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">90</span> <span class="o">-</span><span class="mi">90</span><span class="p">];</span>
+<span class="c">%for the second pole</span>
+<span class="n">log_freq_low_2</span> <span class="p">=</span> <span class="n">a2</span><span class="o">/</span><span class="mi">5</span><span class="p">;</span>
+<span class="n">log_freq_high_2</span> <span class="p">=</span> <span class="mi">5</span><span class="o">*</span><span class="n">a2</span><span class="p">;</span>
+<span class="n">log_freq_min_2</span> <span class="p">=</span> <span class="mi">10</span>^<span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="c">%minimum we want to plot</span>
+<span class="n">log_freq_max_2</span> <span class="p">=</span> <span class="mi">10</span>^<span class="mi">3</span><span class="p">;</span><span class="c">%maximum we want to plot</span>
+<span class="n">asymptotic_x_2</span> <span class="p">=</span> <span class="p">[</span><span class="n">log_freq_min_2</span> <span class="n">log_freq_low_2</span> <span class="n">log_freq_high_2</span> <span class="n">log_freq_max_2</span><span class="p">];</span>
+<span class="n">asymptotic_y_2</span> <span class="p">=</span> <span class="p">[</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">90</span> <span class="o">-</span><span class="mi">90</span><span class="p">];</span>
+
+<span class="c">%now get each on the same frequency vector as the &quot;real&quot; bode plot so we can add them up.</span>
+<span class="c">%we do this using linear interpolation, which is &quot;interp1&quot; in MATLAB/Octave</span>
+<span class="n">wlin</span> <span class="p">=</span> <span class="nb">sort</span><span class="p">([</span><span class="n">log_freq_min_1</span> <span class="n">log_freq_low_1</span> <span class="n">log_freq_high_1</span> <span class="n">log_freq_low_2</span> <span class="n">log_freq_high_2</span> <span class="n">log_freq_max_2</span><span class="p">]);</span>
+<span class="n">asymptotic_y_1_interp</span> <span class="p">=</span> <span class="n">interp1</span><span class="p">(</span><span class="n">asymptotic_x_1</span><span class="p">,</span><span class="n">asymptotic_y_1</span><span class="p">,(</span><span class="n">wlin</span><span class="p">),</span><span class="s">&#39;linear&#39;</span><span class="p">);</span>
+<span class="n">asymptotic_y_2_interp</span> <span class="p">=</span> <span class="n">interp1</span><span class="p">(</span><span class="n">asymptotic_x_2</span><span class="p">,</span><span class="n">asymptotic_y_2</span><span class="p">,(</span><span class="n">wlin</span><span class="p">),</span><span class="s">&#39;linear&#39;</span><span class="p">);</span>
+
+<span class="c">%now compute the total asymptotic by just adding those two plots together!</span>
+<span class="n">asymptotic_tot</span> <span class="p">=</span> <span class="n">asymptotic_y_1_interp</span><span class="o">+</span><span class="n">asymptotic_y_2_interp</span><span class="p">;</span>
+
+<span class="c">%now plot the results</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">phase</span><span class="p">,</span><span class="n">wlin</span><span class="p">,</span><span class="n">asymptotic_y_1_interp</span><span class="p">,</span><span class="s">&#39;g&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">wlin</span><span class="p">,</span><span class="n">asymptotic_y_2_interp</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">wlin</span><span class="p">,</span><span class="n">asymptotic_tot</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="s">&#39;Octave&#39;</span><span class="p">,</span><span class="s">&#39;Asymptotic for pole 1&#39;</span><span class="p">,</span><span class="s">&#39;Asymptotic for pole 2&#39;</span><span class="p">,</span><span class="s">&#39;Total&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Frequency (rad/s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Phase Shift (deg)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13461,6 +13663,20 @@ $$P(s) = \frac{K}{(s+p_1)(s+p_2)\cdots(s+p_n)} = \frac{K_1}{(s+p_1)}+\frac{K_2}{
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">P</span> <span class="p">=</span> <span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">((</span><span class="n">s</span><span class="o">+</span><span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">10000</span><span class="p">));</span>
+<span class="p">[</span><span class="n">mag</span><span class="p">,</span><span class="n">phase</span><span class="p">,</span><span class="n">w</span><span class="p">]</span> <span class="p">=</span> <span class="n">bode</span><span class="p">(</span><span class="n">P</span><span class="p">);</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">phase</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">,</span><span class="s">&#39;LineWidth&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Frequency (rad/s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Phase Shift (deg)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13505,6 +13721,36 @@ $$\phi_2= \angle P_2(j\omega) = -\tan^{-1}\frac{2\zeta\frac{\omega}{\omega_n}}{1
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">zetas</span> <span class="p">=</span> <span class="p">.</span><span class="mi">1</span><span class="p">:.</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">wn</span> <span class="p">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">w</span> <span class="p">=</span> <span class="nb">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+<span class="n">magvec</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">zetas</span><span class="p">),</span><span class="nb">length</span><span class="p">(</span><span class="n">w</span><span class="p">));</span>
+<span class="n">phasevec</span> <span class="p">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="nb">length</span><span class="p">(</span><span class="n">zetas</span><span class="p">),</span><span class="nb">length</span><span class="p">(</span><span class="n">w</span><span class="p">));</span>
+<span class="k">for</span> <span class="n">k</span> <span class="p">=</span> <span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">zetas</span><span class="p">)</span>
+    <span class="n">P</span> <span class="p">=</span> <span class="n">wn</span>^<span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">zetas</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">*</span><span class="n">wn</span><span class="o">*</span><span class="n">s</span><span class="o">+</span><span class="n">wn</span>^<span class="mi">2</span><span class="p">);</span>
+    <span class="p">[</span><span class="n">mag</span><span class="p">,</span><span class="n">phase</span><span class="p">]</span> <span class="p">=</span> <span class="n">bode</span><span class="p">(</span><span class="n">P</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
+    <span class="n">magvec</span><span class="p">(</span><span class="n">k</span><span class="p">,:)</span> <span class="p">=</span> <span class="n">mag</span><span class="p">;</span>
+    <span class="n">phasevec</span><span class="p">(</span><span class="n">k</span><span class="p">,:)</span> <span class="p">=</span> <span class="n">phase</span><span class="p">;</span>
+    <span class="n">legendinfo</span><span class="p">{</span><span class="n">k</span><span class="p">}</span> <span class="p">=</span> <span class="p">[</span><span class="s">&#39;zeta = &#39;</span> <span class="n">num2str</span><span class="p">(</span><span class="n">zetas</span><span class="p">(</span><span class="n">k</span><span class="p">))];</span>
+<span class="k">end</span>
+<span class="nb">figure</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="mi">20</span><span class="o">*</span><span class="n">log10</span><span class="p">(</span><span class="n">magvec</span><span class="p">))</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Magnitude Ratio (dB)&#39;</span><span class="p">)</span>
+<span class="nb">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">semilogx</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">phasevec</span><span class="p">)</span>
+<span class="nb">legend</span><span class="p">(</span><span class="n">legendinfo</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;frequency (rad/s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;Phase shift (degrees)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13602,6 +13848,17 @@ $$P(s) = \frac{1200(s+10)}{(s+1)(s+1000)}$$
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13639,6 +13896,17 @@ $$P(s) = \frac{1200(s+10)}{s(s+1)(s+1000)}$$
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">

@@ -13309,6 +13309,31 @@ $$\frac{Y(s)}{U(s)} = \frac{s+2}{s^2+2s + 20}$$<p>And we wanted to know the tran
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">clear</span> <span class="nb">all</span>
+<span class="c">%set up laplace s</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+<span class="c">%set up TF</span>
+<span class="n">T</span> <span class="p">=</span> <span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">s</span>^<span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">s</span><span class="o">+</span><span class="mi">10</span><span class="p">);</span>
+<span class="c">%simulate TF response to a UNIT impulse</span>
+<span class="p">[</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">]</span> <span class="p">=</span> <span class="n">impulse</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+<span class="c">%scale response by magnitude of input</span>
+<span class="n">y</span> <span class="p">=</span> <span class="mi">10</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
+<span class="c">%offset response to account for initial U and initial Y that had the system at a prior steady state value of 1.</span>
+<span class="n">y</span> <span class="p">=</span> <span class="n">y</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+
+<span class="nb">figure</span><span class="p">()</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s">&#39;System Response (quarks)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13779,6 +13804,20 @@ $$F(s) = 1$$</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span><span class="n">clear</span> <span class="nb">all</span>
+<span class="n">s</span> <span class="p">=</span> <span class="n">tf</span><span class="p">(</span><span class="s">&#39;s&#39;</span><span class="p">);</span>
+
+<span class="c">% YOUR CODE HERE</span>
+<span class="nb">error</span><span class="p">(</span><span class="s">&#39;No Answer Given!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 <div class="output_wrapper">
 <div class="output">
@@ -13816,6 +13855,16 @@ $$F(s) = 1$$</p>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-octave"><pre><span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
     </div>
